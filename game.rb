@@ -1,4 +1,3 @@
-# game.rb
 require_relative 'board'
 require_relative 'player'
 
@@ -10,19 +9,19 @@ class Game
   end
 
   def play
-    puts "Bienvenido a Tic-Tac-Toe en Ruby!"
+    puts "Welcome to Tic-Tac-Toe in Ruby!"
 
     loop do
       system("clear") || system("cls")
       @board.display
 
       current_player = @players[@current_index]
-      puts "Turno de #{current_player.name} (#{current_player.symbol})"
+      puts "#{current_player.name}'s turn (#{current_player.symbol})"
 
       row, col = ask_for_move(current_player)
 
       unless @board.place_symbol(row, col, current_player.symbol)
-        puts "Movimiento inválido. Intenta de nuevo."
+        puts "Invalid move. Try again."
         sleep(1)
         next
       end
@@ -30,12 +29,12 @@ class Game
       if @board.winner?
         system("clear") || system("cls")
         @board.display
-        puts "¡#{current_player.name} ha ganado con #{current_player.symbol}!"
+        puts "#{current_player.name} has won with #{current_player.symbol}!"
         break
       elsif @board.full?
         system("clear") || system("cls")
         @board.display
-        puts "¡Empate! No quedan movimientos posibles."
+        puts "It's a draw! No more moves available."
         break
       else
         switch_turn
@@ -47,9 +46,9 @@ class Game
 
   def ask_for_move(current_player)
     loop do
-      print "#{current_player.name}, ingresa la fila (1-3): "
+      print "#{current_player.name}, enter the row (1-3): "
       row_input = gets&.chomp
-      print "#{current_player.name}, ingresa la columna (1-3): "
+      print "#{current_player.name}, enter the column (1-3): "
       col_input = gets&.chomp
 
       row = Integer(row_input) rescue nil
@@ -62,10 +61,10 @@ class Game
         if @board.valid_move?(row, col)
           return [row, col]
         else
-          puts "La casilla ya está ocupada o es inválida. Intenta otra."
+          puts "The square is already taken or invalid. Try another one."
         end
       else
-        puts "Entrada inválida. Debes ingresar números entre 1 y 3."
+        puts "Invalid input. You must enter numbers between 1 and 3."
       end
     end
   end

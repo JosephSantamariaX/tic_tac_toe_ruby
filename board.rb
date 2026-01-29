@@ -35,13 +35,13 @@ class Board
   def winner?
     lines = []
 
-    # filas y columnas
+    # rows and columns
     3.times do |i|
-      lines << @grid[i] # fila
-      lines << [@grid[0][i], @grid[1][i], @grid[2][i]] # columna
+      lines << @grid[i] # row
+      lines << [@grid[0][i], @grid[1][i], @grid[2][i]] # column
     end
 
-    # diagonales
+    # diagonals
     lines << [@grid[0][0], @grid[1][1], @grid[2][2]]
     lines << [@grid[0][2], @grid[1][1], @grid[2][0]]
 
